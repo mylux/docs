@@ -390,6 +390,7 @@ Creating Custom Rule objects
 ----------------------------
 
 If your application has rules that are commonly reused, it is helpful to package
+
 those rules into re-usable classes::
 
     // in src/Model/Rule/CustomRule.php
