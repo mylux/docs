@@ -386,11 +386,31 @@ You may want to use entity methods as domain rules::
         return $entity->isOkLooking();
     }, 'ruleName');
 
+In case of custom functions, It is also possible to override the error message from within the validation function.
+
+When a string is returned, automatically the validation result is considered as failed and the returned string is transfomed into the error message. Example::
+
+   $rules->add(function ($entity, $options) {
+         $minumumAge = 18;
+         if($entity->age < $miniumAge) {
+            return "Your age is " . $entity->age . ". The minimum age should be " . $minimumAge;
+         }
+         else
+         {
+            return true;
+         }
+      },
+      'AgeValidation',
+      [
+         'errorField'=>'age',
+         'message'=>'Age should be above 18'
+      ]
+   );
+
 Creating Custom Rule objects
 ----------------------------
 
-If your application has rules that are commonly reused, it is helpful to package
-those rules into re-usable classes::
+If your application has rules that are commonly reused, it is helpful to package those rules into re-usable classes::
 
     // in src/Model/Rule/CustomRule.php
     namespace App\Model\Rule;
